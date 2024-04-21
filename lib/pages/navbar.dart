@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:recieptify/pages/AboutPage.dart';
+import 'package:recieptify/pages/Budget.dart';
 import 'package:recieptify/pages/GraphPage.dart';
 import 'package:recieptify/pages/HomePage.dart';
 
@@ -16,7 +17,7 @@ class _navbarState extends State<navbar> {
 
 
   int _selectedIndex = 1;
-   List<Widget> yoo = [GraphPage(),HomePage(),PersonalDetailsPage() ];
+   List<Widget> yoo = [GraphPage(),HomePage(),BudgetPage(),PersonalDetailsPage() ];
   
 
   @override
@@ -37,7 +38,7 @@ class _navbarState extends State<navbar> {
       activeColor: Color(0xFFE9F4FA),
       tabBackgroundColor: Color(0xFF2D5056),
       tabMargin: EdgeInsets.all(4),
-      padding: EdgeInsets.symmetric(horizontal: 35,vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
       
       gap: 2,
       iconSize: 25,
@@ -53,6 +54,10 @@ class _navbarState extends State<navbar> {
       GButton(icon: Icons.home_outlined,
       iconColor: Colors.black,
               text: "Home",
+              ),
+              GButton(text: "Budget",
+      iconColor: Colors.black,
+        icon: Icons.monetization_on_outlined,
               ),
       GButton(text: "Profile",
       iconColor: Colors.black,

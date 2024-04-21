@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:recieptify/components/db.dart';
 import 'package:recieptify/components/piechart2.dart';
 
 class GraphPage extends StatefulWidget {
+  
   const GraphPage({Key? key});
 
   @override
@@ -68,12 +70,52 @@ class _GraphPageState extends State<GraphPage> {
                         child: TabBarView(
                           children: [
                             // Content for Tab 1
-                            Center(child: Text('Grocery expenses')),
+                            ListView.builder(
+                              itemCount: Grocery.length,
+                              itemBuilder: (context, index) {
+                                var keys = Grocery.keys.toList();
+                                var values = Grocery.values.toList();
+                                return ListTile(
+                                  title: Text(keys[index]),
+                                  subtitle: Text('\$${values[index]}'),
+                                );
+                              },
+                            ),
                             // Content for Tab 2
-                            Center(child: Text('Tab 2 content')),
+                            ListView.builder(
+                              itemCount: Food.length,
+                              itemBuilder: (context, index) {
+                                var keys = Food.keys.toList();
+                                var values = Food.values.toList();
+                                return ListTile(
+                                  title: Text(keys[index]),
+                                  subtitle: Text('\$${values[index]}'),
+                                );
+                              },
+                            ),
                             // Content for Tab 3
-                            Center(child: Text('Tab 3 content')),
-                            Center(child: Text('Tab 4 content')),
+                            ListView.builder(
+                              itemCount: Other.length,
+                              itemBuilder: (context, index) {
+                                var keys = Other.keys.toList();
+                                var values = Other.values.toList();
+                                return ListTile(
+                                  title: Text(keys[index]),
+                                  subtitle: Text('\$${values[index]}'),
+                                );
+                              },
+                            ),
+                            ListView.builder(
+                              itemCount: Bank.length,
+                              itemBuilder: (context, index) {
+                                var keys = Bank.keys.toList();
+                                var values = Bank.values.toList();
+                                return ListTile(
+                                  title: Text(keys[index]),
+                                  subtitle: Text('\$${values[index]}'),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),

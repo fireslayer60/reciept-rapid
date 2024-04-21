@@ -3,17 +3,24 @@ import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
 import 'package:recieptify/components/colors.dart';
+import 'package:recieptify/components/db.dart';
+import 'package:recieptify/components/db.dart';
 import 'package:recieptify/components/indicator.dart';
 
 class PieChartSample2 extends StatefulWidget {
-  const PieChartSample2({super.key});
+  const PieChartSample2({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }
 
-class PieChart2State extends State {
+class PieChart2State extends State<PieChartSample2> {
   int touchedIndex = -1;
+  // Declare db as a late instance variable
+
+  @override
+ 
+   
 
   @override
   Widget build(BuildContext context) {
@@ -100,67 +107,38 @@ class PieChart2State extends State {
   }
 
   List<PieChartSectionData> showingSections() {
+    final List<Map<String, int>> maps = [Grocery, Food, Other, Bank];
+    final List<Color> colors = [
+      AppColors.contentColorBlue,
+      AppColors.contentColorYellow,
+      AppColors.contentColorPurple,
+      AppColors.contentColorGreen,
+    ];
+
+    double totalSum = maps.fold(0, (prev, map) => prev + map.values.reduce((a, b) => a + b));
+
     return List.generate(4, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
       const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: AppColors.contentColorBlue,
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: AppColors.contentColorYellow,
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: AppColors.contentColorPurple,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: AppColors.contentColorGreen,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        default:
-          throw Error();
-      }
+
+      final Map<String, int> currentMap = maps[i];
+      final Color color = colors[i];
+      final double value = currentMap.values.fold(0, (prev, curr) => prev + curr) / totalSum * 100;
+
+      return PieChartSectionData(
+        color: color,
+        value: value,
+        title: '${value.toStringAsFixed(0)}%',
+        radius: radius,
+        titleStyle: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
+          color: AppColors.mainTextColor1,
+          shadows: shadows,
+        ),
+      );
     });
   }
 }

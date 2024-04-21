@@ -26,8 +26,8 @@ class _StartPageState extends State<StartPage> {
             Container(
             
               
-              height: 50,
-              width: 150,
+              height: 60,
+              width: 200,
               decoration: BoxDecoration(image: DecorationImage(image: AssetImage("lib/images/img.png"),fit: BoxFit.fill)),
             ),
             SizedBox(height: 20,),
@@ -42,7 +42,7 @@ class _StartPageState extends State<StartPage> {
             Container(
               
               width: 500,
-              height: 400,
+              height: 389,
               decoration: BoxDecoration(color: Color(0xFFE9F4FA),borderRadius: BorderRadius.only(topLeft: Radius.circular(70),topRight: Radius.circular(70))),
               child: Column(
                 children: [
